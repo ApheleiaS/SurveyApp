@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='page.css') }}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="{{url_for('static', filename='jscolor.js')}}"></script>
+<script type="text/javascript">
+     function submitJS(){
+        var image = document.getElementById("ques-img").src;
+        var colorchoice = document.getElementById("valDisplay").innerHTML;
+        window.alert("Image: " + image + "Color Chosen:" + colorchoice);
+     }
+     </script>
+     <script type="text/javascript">
+var room = 1;
+function add_fields() {
+ 
+    room++;
+    var objTo = document.getElementById('color_fields');
+    var divtest = document.createElement("div");
+  divtest.setAttribute("class", "removeclass"+room);
+  var rdiv = 'removeclass'+room;
+    divtest.innerHTML = '<input type="text"  id="Color_Name_'+room+'"  value="" placeholder="Color Name" style="width: 30%;"><input type="text"  id="Composition_'+room+'" value="" placeholder="Composition" style="width: 30%;"><button type="button"  onclick="remove_fields('+ room +');"> <span> Remove </span> </button>';
+       console.log(room)
+
+    
+    objTo.appendChild(divtest)
+}
+   function remove_fields(rid) {
+     $('.removeclass'+rid).remove();
+   }
+</script>
+<script type="text/javascript">
+window.onload=function(){setTimeout(function() {
+  document.getElementById('ques-img').style.display='none';
+  document.getElementById('Question').innerHTML="";
+}, 60*1000);}
+</script>
+{% endblock %}
+{% block content %}
+<form name="match-color" onSubmit="JavaScript:submitJS()">
+<div class="w3-row">
+Instruction : The image will be shown for 5 minutes. Look at it carefully and then write the number of distinct colors you see in the image.<br/><br/>
+  
+  <div class="w3-col w3-container m6 l6">
+<!--https://bootsnipp.com/snippets/AXVrV-->
+ Number of Distinct Colours : <input type="number" name="quantity" min="1" max="400">   
+
+<br/> <br/>
+
+<div id="color_fields">
+List out the colors that you see(e.g. Peach, Magenta, Light Blue, Dark Blue etc) and their Composition( blue+red, blue+white, yellow+green etc ): 
+</div>
+<input type="text"  id="Color_Name_1"  value="" placeholder="Color Name" style="width: 30%;">
+<input type="text"  id="Composition_1" value="" placeholder="Composition" style="width: 30%;">
+<button class="btn btn-success" type="button"  onclick="add_fields();"> <span class="glyphicon glyphicon-plus" aria-hidden="true">Add</span> </button>
+
+
+
+<br/><br/>
+<br/>
+<input name="Submit" type="submit" value="Next">
+
+</div>
+  <div class="w3-col w3-container m6 l6" id="Question">  
+   Question Image:<br/> <img id="ques-img" src="" width="120" height="90" />
+  </div>
+</div>
+<br/> 
+</form>
+
+{% endblock %}

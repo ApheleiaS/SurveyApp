@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='page.css') }}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="{{url_for('static', filename='jscolor.js')}}"></script>
+<script type="text/javascript">
+     function submitJS(){
+        var image = document.getElementById("ques-img").src;
+        var colorchoice = document.getElementById("valDisplay").innerHTML;
+        window.alert("Image: " + image + "Color Chosen:" + colorchoice);
+     }
+     </script>
+<script type="text/javascript">
+window.onload=function(){setTimeout(function() {
+  document.getElementById('ques-img').style.display='none';
+  document.getElementById('Question').innerHTML="";
+}, 10*1000);}
+</script>
+{% endblock %}
+{% block content %}
+<form name="match-color" onSubmit="JavaScript:submitJS()">
+<div class="w3-row">
+Instruction : The image will disappear in 10 seconds. Look at it carefully and then choose the most dominant color that you saw.<br/><br/>
+  <div class="w3-col w3-container m6 l6">
+   
+Color: <br/>
+<input id="color-chosen" class="jscolor {
+    width:300,
+    height:200,
+    position:'bottom',
+    borderColor:'#FFF #666 #666 #FFF',
+    insetColor:'#666 #FFF #FFF #666',
+    backgroundColor:'#CCC',
+    valueElement:'valDisplay',
+    closable:true,
+    closeText:'Done'}" 
+    value=""
+   	style="width: 300px;height:200px;">
+<br/>
+HexValue: <span id='valDisplay'></span>
+  </div>
+  <div class="w3-col w3-container m6 l6" id="Question">  
+   Question Image:<br/> <img id="ques-img" src="" width="120" height="90" />
+  </div>
+</div>
+<br/> 
+<input name="Submit" type="submit" value="Next">
+</form>
+
+{% endblock %}

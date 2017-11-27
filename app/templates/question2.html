@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='page.css') }}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+  html, body { height: 100%; width: 100%;}
+  .draggable { font-size:10px ;width: 12%; height: 10%; padding: 0.5em; float: left; margin: 10px 15px 10px 0;  }
+  .droppable { width: 30%; height: 20%; padding: 0.5em; float: left; margin: 0px; }
+  </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+
+  $( function() {
+    $( ".draggable" ).draggable({
+      revert: true
+    });
+    $( ".droptargets" ).droppable({
+      drop: function( event, ui ) {
+        $( this ).css("background-color", $(ui.draggable).css("background-color"));
+      }
+    });
+  } );
+  </script>
+
+
+
+  
+<script type="text/javascript">
+     function submitJS(){
+        var image = document.getElementById("ques-img").src;
+        var colorchoice = document.getElementById("valDisplay").innerHTML;
+        window.alert("Image: " + image + "Color Chosen:" + colorchoice);
+     }
+     </script>
+
+{% endblock %}
+
+
+{% block content %}
+<form name="arrange-color" onSubmit="JavaScript:submitJS()">
+Instruction : Drag the colors given on the right and arrange them in the grid around the central color on the left of the screen. <br/><br/>
+<!--Create a grid of 20 colors on the right (Draggable). Colors to be given in a list from controller --> 
+<div class="w3-col w3-container m6 l6" >  
+ {% for color in list_of_colors %}
+<div class="draggable ui-widget-content"  id=color_{{loop.index}} style="font-size:8px; background-color:{{color}};">
+  <p></p>
+</div>
+{% endfor %}
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+<input name="Submit" type="submit" value="Next">
+
+
+</div>
+<div class="w3-col w3-container m5 l5" >  
+<div class="droppable droptargets ui-widget-content ui-widget-header">
+</div>
+
+<div class="droppable droptargets ui-widget-content ui-widget-header">
+</div>
+
+<div class="droppable droptargets ui-widget-content ui-widget-header">
+</div>
+
+<div class="droppable droptargets ui-widget-content ui-widget-header">
+</div>
+
+<div class="droppable ui-widget-content ui-widget-header" id="centre_color" style="background-color:{{centre_color}}; ">
+</div>
+
+<div class="droptargets droppable ui-widget-content ui-widget-header">
+</div>
+
+<div class="droptargets droppable ui-widget-content ui-widget-header">
+</div>
+
+<div class=" droptargets droppable ui-widget-content ui-widget-header">
+</div>
+
+<div class="droptargets droppable ui-widget-content ui-widget-header">
+</div>
+
+</div>
+
+
+ 
+<!-- Create a grid of 9 colors on the left. Centre being fixed given in the controller. Rest droppable.-->   
+</form>
+
+{% endblock %}
